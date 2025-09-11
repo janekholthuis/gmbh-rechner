@@ -13,6 +13,9 @@
 :root{
   --bg:#ffffff; --card:#ffffff; --text:#000; --muted:#5f6b7a; --brand:#212C41;
   --border:#E6E8EE; --shadow:0 8px 24px rgba(0,0,0,.06); --radius:18px; --max:980px;
+  /* Highlight-Farben */
+  --success:#0a6c2f; --success-bg:#e6f9ed; --success-brd:#b7e6c5;
+  --danger:#9b1b1b;  --danger-bg:#ffecec; --danger-brd:#ffc2c2;
 }
 *{box-sizing:border-box} html,body{margin:0}
 body{font-family:"Wix Madefor Display",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.55}
@@ -37,6 +40,21 @@ th,td{border:1px solid var(--border);padding:10px 12px;text-align:left;font-size
 thead th{background:#F7F8FA;font-weight:700;color:#0c1322}
 td.num{text-align:right;font-variant-numeric:tabular-nums}
 
+/* Highlight-Reihen im Vergleich */
+tr.row-total td{
+  background:var(--danger-bg);
+  color:var(--danger);
+  border-color:var(--danger-brd);
+  font-weight:800;
+}
+tr.row-liq td{
+  background:var(--success-bg);
+  color:var(--success);
+  border-color:var(--success-brd);
+  font-weight:800;
+}
+
+/* CTA + image */
 .cta{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff;background:var(--brand);padding:14px 20px;border-radius:999px;font-weight:800;box-shadow:var(--shadow)}
 .case-cta{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center}
 .case-cta img{width:120px;height:120px;object-fit:cover;border-radius:50%;border:1px solid var(--border)}
@@ -44,17 +62,19 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
 .section-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .section-head .badge{white-space:nowrap}
 
+/* Badges */
 .badge{
   display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;
   padding:10px 16px;border-radius:12px;box-shadow:var(--shadow);line-height:1
 }
-.badge.ok{background:#e6f9ed;color:#0a6c2f;border:1px solid #b7e6c5}
+.badge.ok{background:var(--success-bg);color:var(--success);border:1px solid var(--success-brd)}
 .badge.ok::before{content:"✔️";font-size:16px}
 .badge.meh{background:#fff9e6;color:#7a5200;border:1px solid #ffe2a6}
 .badge.meh::before{content:"⚖️";font-size:16px}
-.badge.no{background:#ffecec;color:#9b1b1b;border:1px solid #ffc2c2}
+.badge.no{background:var(--danger-bg);color:var(--danger);border:1px solid var(--danger-brd)}
 .badge.no::before{content:"❌";font-size:16px}
 
+/* Fallstudie */
 .case{
   display:grid;
   grid-template-columns:minmax(240px,360px) 1fr;
@@ -72,9 +92,16 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
   .case .case-media{align-items:center}
 }
 
-.donut svg{display:block}
-.donut .legend{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;font-size:12px}
-.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
+/* Vorteile */
+.feature-grid{display:grid;gap:14px}
+@media (min-width: 900px){ .feature-grid{ grid-template-columns: 1fr 1fr; } }
+.feature{border:1px solid var(--border);border-radius: var(--radius);background:#fff;padding:14px 16px}
+.feature .title{display:flex;align-items:center;gap:10px;margin:0 0 6px 0;font-weight:800;color:var(--brand)}
+.feature .icon{width:28px;height:28px;display:inline-grid;place-items:center;border-radius:10px;border:1px solid var(--border);background:#F7F8FA}
+.feature p{margin:0;color:#0c1322;font-size:15px}
+.feature ul{margin:6px 0 0 22px;padding:0;color:#0c1322}
+.feature li{margin:4px 0}
+.note{margin-top:10px;font-size:13px;color:var(--muted)}
 
 @media print{
   .wrap{padding:18px}
@@ -83,45 +110,12 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
   table, img, svg{page-break-inside:avoid}
   h2{break-after:avoid}
 }
-
-/* Vorteile: Grid + Feature-Karten */
-.feature-grid{
-  display:grid;
-  gap:14px;
-}
-@media (min-width: 900px){
-  .feature-grid{ grid-template-columns: 1fr 1fr; }
-}
-.feature{
-  border:1px solid var(--border);
-  border-radius: var(--radius);
-  background:#fff;
-  padding:14px 16px;
-}
-.feature .title{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin:0 0 6px 0;
-  font-weight:800;
-  color:var(--brand);
-}
-.feature .icon{
-  width:28px; height:28px;
-  display:inline-grid; place-items:center;
-  border-radius:10px; border:1px solid var(--border);
-  background:#F7F8FA;
-}
-.feature p{
-  margin:0;
-  color:#0c1322;
-  font-size:15px;
-}
-.feature ul{
-  margin:6px 0 0 22px; padding:0; color:#0c1322;
-}
-.feature li{ margin:4px 0 }
-.note{ margin-top:10px; font-size:13px; color:var(--muted); }
+/* Vergleich: gleiche Höhe + Fazit unten ausrichten */
+.compare { align-items: stretch; }                       /* Grid-Items strecken */
+.compare > .card { display:flex; flex-direction:column; }/* Card wird Flex-Container */
+.compare > .card .summary { margin-top:auto; }           /* Fazit nach unten schieben */
+.gap-after-totals { height: 16px; }                      /* Luft nach Gesamtabgaben */
+.compare > .card .summary { border-top:1px dashed var(--border); padding-top:12px; }
 
 </style>
 </head>
@@ -143,55 +137,80 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
     <p>Zusätzlich profitierst du von <strong>Haftungsbeschränkung</strong>, besserer <strong>Finanzierbarkeit</strong> und professionellerer <strong>Außenwirkung</strong>.</p>
     <p class="muted">Disclaimer: Für exakte Ergebnisse bedarf es einer individuellen Beratung. Keine Steuerberatung und keine Gewähr auf Ergebnis.</p>
   </section>
+
   <br>
-    <h2>Liquiditätsvergleich Einzelunternehmen vs. GmbH</h2>
-  <section class="grid cols-2" style="margin-top:18px">
+  <h2>Liquiditätsvergleich Einzelunternehmen vs. GmbH</h2>
+<section class="grid cols-2 compare" style="margin-top:18px">
 
-    <div class="card">
-      <h2>Einzelunternehmen</h2>
+  <!-- Einzelunternehmen -->
+  <div class="card">
+    <h2>Einzelunternehmen</h2>
+
+    <!-- Details -->
+    <table>
+      <thead><tr><th>Abgaben</th><th class="num">Betrag</th></tr></thead>
+      <tbody>
+        <tr><td>ESt.</td><td class="num">40.000 €</td></tr>
+        <tr><td>GewSt.</td><td class="num">0 €</td></tr>
+        <tr><td>Soli</td><td class="num">2.200 €</td></tr>
+        <tr><td>Kirchensteuer</td><td class="num">3.600 €</td></tr>
+        <tr><td>Krankenkasse</td><td class="num">8.400 €</td></tr>
+        <tr class="row-total"><td><strong>Gesamtabgaben</strong></td><td class="num"><strong>54.200 €</strong></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Luft nach Gesamtabgaben -->
+    <div class="gap-after-totals"></div>
+
+    <!-- Fazit (unten ausgerichtet) -->
+    <div class="summary">
       <table>
-        <thead><tr><th>Abgaben</th><th class="num">Betrag</th></tr></thead>
         <tbody>
-          <tr><td>ESt.</td><td class="num">40.000 €</td></tr>
-          <tr><td>GewSt.</td><td class="num">0 €</td></tr>
-          <tr><td>Soli</td><td class="num">2.200 €</td></tr>
-          <tr><td>Kirchensteuer</td><td class="num">3.600 €</td></tr>
-          <tr><td>Krankenkasse</td><td class="num">8.400 €</td></tr>
-          <tr><td><strong>Gesamtabgaben</strong></td><td class="num"><strong>54.200 €</strong></td></tr>
+          <tr><td>Privater Gewinn nach Abgaben</td><td class="num">85.800 €</td></tr>
+          <tr class="row-liq"><td><strong>Liquidität gesamt</strong></td><td class="num"><strong>85.800 €</strong></td></tr>
         </tbody>
       </table>
-      <table style="margin-top:10px">
-        <tbody>
-          <tr><td>Privater Gewinn nach Abgaben</td><td class="num"><strong>85.800 €</strong></td></tr>
-          <tr><td><strong>Liquidität gesamt</strong></td><td class="num"><strong>85.800 €</strong></td></tr>
-        </tbody>
-      </table>
-      
-     
     </div>
+  </div>
 
-    <div class="card">
-      <h2>GmbH</h2>
+  <!-- GmbH -->
+  <div class="card">
+    <h2>GmbH</h2>
+
+    <!-- Details -->
+    <table>
+      <thead><tr><th>Abgaben</th><th class="num">Betrag</th></tr></thead>
+      <tbody>
+        <tr><td>GewSt.</td><td class="num">8.010 €</td></tr>
+        <tr><td>KörpersSt.</td><td class="num">18.000 €</td></tr>
+        <tr><td>Soli</td><td class="num">990 €</td></tr>
+        <tr><td>Deine Anstellung als GF</td><td class="num">36.000 €</td></tr>
+        <tr class="row-total"><td><strong>Gesamtabgaben</strong></td><td class="num"><strong>63.000 €</strong></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Luft nach Gesamtabgaben -->
+    <div class="gap-after-totals"></div>
+
+    <!-- Fazit (unten ausgerichtet) -->
+    <div class="summary">
       <table>
-        <thead><tr><th>Abgaben</th><th class="num">Betrag</th></tr></thead>
-        <tbody>
-          <tr><td>GewSt.</td><td class="num">8.010 €</td></tr>
-          <tr><td>KörpersSt.</td><td class="num">18.000 €</td></tr>
-          <tr><td>Soli</td><td class="num">990 €</td></tr>
-          <tr><td>Deine Anstellung als GF</td><td class="num">36.000 €</td></tr>
-          <tr><td><strong>Gesamtabgaben</strong></td><td class="num"><strong>63.000 €</strong></td></tr>
-        </tbody>
-      </table>
-      <table style="margin-top:10px">
         <tbody>
           <tr><td><strong>Unternehmensgewinn nach Abgaben</strong></td><td class="num"><strong>77.000 €</strong></td></tr>
-          <tr><td>Privater Gewinn nach Abgaben <span class="muted">(vereinfachte Nettoannahme)</span></td><td class="num"><strong>25.200 €</strong></td></tr>
-          <tr><td><strong>Liquidität gesamt</strong></td><td class="num"><strong>102.800 €</strong></td></tr>
+          <tr>
+            <td>Privater Gewinn nach Abgaben</td>
+            <td class="num">25.200 €</td>
+          </tr>
+          <tr class="row-liq"><td><strong>Liquidität gesamt</strong></td><td class="num"><strong>102.800 €</strong></td></tr>
         </tbody>
       </table>
     </div>
-  </section>
-  
+  </div>
+
+</section>
+
+
+  <!-- CTA 1 -->
   <section class="card" style="margin-top:18px">
     <div class="case-cta">
       <img src="https://media.licdn.com/dms/image/v2/D4E03AQEqoiXxmD9YBA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721725188972?e=1760572800&v=beta&t=4I3aT5HxFK5OawdF-fuY1jK2WEe6i1d9w77LD_HMA9U" alt="Lukas Janik">
@@ -202,6 +221,8 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
       </div>
     </div>
   </section>
+
+  <!-- Fallstudie -->
   <section class="card case" style="margin-top:18px">
     <div class="case-media">
       <img src="https://provenia.de/wp-content/uploads/2025/01/Jakob-Wiemer.png" alt="Jakob Wiemer – Fallstudie" loading="lazy" width="360" height="360">
@@ -221,54 +242,46 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
       </blockquote>
     </div>
   </section>
-<section class="card" id="vorteile" style="margin-top:18px">
-  <h2>Vorteile einer GmbH</h2>
 
-  <div class="feature-grid">
-    <div class="feature">
-      <h3 class="title"><span class="icon">🛡️</span>Haftung & Sicherheit</h3>
-      <p>Klare Trennung von Privat- und Unternehmensvermögen. Persönliche Risiken werden reduziert, sofern keine
-         Durchgriffstatbestände vorliegen.</p>
+  <!-- Vorteile -->
+  <section class="card" id="vorteile" style="margin-top:18px">
+    <h2>Vorteile einer GmbH</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3 class="title"><span class="icon">🛡️</span>Haftung & Sicherheit</h3>
+        <p>Klare Trennung von Privat- und Unternehmensvermögen. Persönliche Risiken werden reduziert, sofern keine
+           Durchgriffstatbestände vorliegen.</p>
+      </div>
+      <div class="feature">
+        <h3 class="title"><span class="icon">💶</span>Planbare Steuerlast (≈ 30 % effektiv)</h3>
+        <p>Körperschaftsteuer, Solidaritätszuschlag und Gewerbesteuer ergeben eine vergleichsweise stabile Gesamtbelastung.
+           Hebesatz der Kommune kann variieren.</p>
+      </div>
+      <div class="feature">
+        <h3 class="title"><span class="icon">🏦</span>Bessere Finanzierbarkeit</h3>
+        <p>Professionellere Außenwirkung bei Banken & Investoren. Strukturiertes Reporting und klare Eigentümerstruktur
+           erleichtern Kredit- und Förderprozesse.</p>
+      </div>
+      <div class="feature">
+        <h3 class="title"><span class="icon">👔</span>Gehalts- & Benefit-Optimierung</h3>
+        <p>Mehr Gestaltungsspielraum als Geschäftsführer*in: z. B. Firmenwagen, Internetpauschale, betriebliche Altersvorsorge,
+           Reisekosten, Sachbezüge u. a.</p>
+      </div>
+      <div class="feature">
+        <h3 class="title"><span class="icon">📈</span>Holding-Option & Ausschüttungen</h3>
+        <p>Strukturvorteile für Vermögensaufbau und Re-Investitionen; Ausschüttungen/Verkäufe können in Holding-Modellen
+           begünstigt sein (regelabhängig).</p>
+      </div>
+      <div class="feature">
+        <h3 class="title"><span class="icon">🤝</span>Außenwirkung & Deals</h3>
+        <p>Höhere Professionalität in Verhandlungen mit Partnern und Unternehmenskunden, oft Voraussetzung für größere Rahmenverträge.</p>
+      </div>
     </div>
+    <p class="note">Hinweis: Vorteile sind abhängig von individueller Situation (Hebesatz, Branchenbesonderheiten,
+       Gesellschafter-/GF-Setup, Vergütung). Keine Steuerberatung.</p>
+  </section>
 
-    <div class="feature">
-      <h3 class="title"><span class="icon">💶</span>Planbare Steuerlast (≈ 30 % effektiv)</h3>
-      <p>Körperschaftsteuer, Solidaritätszuschlag und Gewerbesteuer ergeben eine vergleichsweise stabile Gesamtbelastung.
-         Hebesatz der Kommune kann variieren.</p>
-    </div>
-
-    <div class="feature">
-      <h3 class="title"><span class="icon">🏦</span>Bessere Finanzierbarkeit</h3>
-      <p>Professionellere Außenwirkung bei Banken & Investoren. Strukturiertes Reporting und klare Eigentümerstruktur
-         erleichtern Kredit- und Förderprozesse.</p>
-    </div>
-
-    <div class="feature">
-      <h3 class="title"><span class="icon">👔</span>Gehalts- & Benefit-Optimierung</h3>
-      <p>Mehr Gestaltungsspielraum als Geschäftsführer*in: z. B. Firmenwagen, Internetpauschale, betriebliche Altersvorsorge,
-         Reisekosten, Sachbezüge u. a.</p>
-    </div>
-
-    <div class="feature">
-      <h3 class="title"><span class="icon">📈</span>Holding-Option & Ausschüttungen</h3>
-      <p>Strukturvorteile für Vermögensaufbau und Re-Investitionen; Ausschüttungen/Verkäufe können in Holding-Modellen
-         begünstigt sein (regelabhängig).</p>
-    </div>
-
-    <div class="feature">
-      <h3 class="title"><span class="icon">🤝</span>Außenwirkung & Deals</h3>
-      <p>Höhere Professionalität in Verhandlungen mit Partnern und Unternehmenskunden, oft Voraussetzung für größere Rahmenverträge.</p>
-    </div>
-  </div>
-
-  <p class="note">Hinweis: Vorteile sind abhängig von individueller Situation (Hebesatz, Branchenbesonderheiten,
-     Gesellschafter-/GF-Setup, Vergütung). Keine Steuerberatung.</p>
-</section>
-
-
-
-
-  
+  <!-- CTA 2 -->
   <section class="card" style="margin-top:18px">
     <div class="case-cta">
       <img src="https://media.licdn.com/dms/image/v2/D4E03AQEqoiXxmD9YBA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721725188972?e=1760572800&v=beta&t=4I3aT5HxFK5OawdF-fuY1jK2WEe6i1d9w77LD_HMA9U" alt="Lukas Janik">
