@@ -5,7 +5,6 @@
 <title>GmbH Rechner Ergebnis Janek Holthuis</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- Brand Font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap" rel="stylesheet">
@@ -20,43 +19,63 @@ body{font-family:"Wix Madefor Display",system-ui,-apple-system,Segoe UI,Roboto,A
 .wrap{max-width:var(--max);margin:0 auto;padding:28px}
 .center{text-align:center}
 
-/* Cover */
 .hero{padding:26px 0 8px}
 .logo{height:34px;display:block;margin:0 auto 14px}
 .banner{width:100%;height:180px;object-fit:cover;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);margin:0 auto 16px}
 .h1{font-weight:800;font-size:clamp(26px,4vw,36px);margin:4px 0 6px;color:var(--brand)}
-.person{color:#222;font-size:15px;margin-top:6px}
 
 .divider{height:1px;background:var(--border);margin:24px 0}
 
-/* Cards & Layout */
 .grid{display:grid;gap:18px}
 @media(min-width:900px){ .grid.cols-2{grid-template-columns:1fr 1fr} }
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
 h2{font-size:22px;margin:6px 0 10px;color:var(--brand)}
 .muted{color:var(--muted);font-size:14px}
 
-/* Tables */
 table{width:100%;border-collapse:collapse}
 th,td{border:1px solid var(--border);padding:10px 12px;text-align:left;font-size:15px}
 thead th{background:#F7F8FA;font-weight:700;color:#0c1322}
 td.num{text-align:right;font-variant-numeric:tabular-nums}
 
-/* CTA + image */
 .cta{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff;background:var(--brand);padding:14px 20px;border-radius:999px;font-weight:800;box-shadow:var(--shadow)}
 .case-cta{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center}
 .case-cta img{width:120px;height:120px;object-fit:cover;border-radius:50%;border:1px solid var(--border)}
-.case{display:grid;grid-template-columns:360px 1fr;gap:16px;align-items:start}
-.case img{width:100%;height:auto;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow)}
-.case blockquote{margin:0}
-.case blockquote footer{margin-top:8px;font-weight:700}
 
-/* Donut SVGs */
+.section-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.section-head .badge{white-space:nowrap}
+
+.badge{
+  display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;
+  padding:10px 16px;border-radius:12px;box-shadow:var(--shadow);line-height:1
+}
+.badge.ok{background:#e6f9ed;color:#0a6c2f;border:1px solid #b7e6c5}
+.badge.ok::before{content:"✔️";font-size:16px}
+.badge.meh{background:#fff9e6;color:#7a5200;border:1px solid #ffe2a6}
+.badge.meh::before{content:"⚖️";font-size:16px}
+.badge.no{background:#ffecec;color:#9b1b1b;border:1px solid #ffc2c2}
+.badge.no::before{content:"❌";font-size:16px}
+
+.case{
+  display:grid;
+  grid-template-columns:minmax(240px,360px) 1fr;
+  gap:16px;
+  align-items:center;
+}
+.case .case-media{display:flex;flex-direction:column;align-items:center;text-align:center}
+.case .case-media img{
+  width:100%;max-width:360px;height:auto;border-radius:var(--radius);
+  border:1px solid var(--border);box-shadow:var(--shadow)
+}
+.case .attribution{margin-top:8px;font-weight:700;color:#0c1322}
+@media (max-width:900px){
+  .case{grid-template-columns:1fr;align-items:start}
+  .case .case-media{align-items:center}
+}
+
 .donut svg{display:block}
 .donut .legend{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;font-size:12px}
 .dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
 
-/* Print tweaks */
 @media print{
   .wrap{padding:18px}
   .card{box-shadow:none}
@@ -64,59 +83,93 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
   table, img, svg{page-break-inside:avoid}
   h2{break-after:avoid}
 }
+
+/* Vorteile: Grid + Feature-Karten */
+.feature-grid{
+  display:grid;
+  gap:14px;
+}
+@media (min-width: 900px){
+  .feature-grid{ grid-template-columns: 1fr 1fr; }
+}
+.feature{
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  background:#fff;
+  padding:14px 16px;
+}
+.feature .title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:0 0 6px 0;
+  font-weight:800;
+  color:var(--brand);
+}
+.feature .icon{
+  width:28px; height:28px;
+  display:inline-grid; place-items:center;
+  border-radius:10px; border:1px solid var(--border);
+  background:#F7F8FA;
+}
+.feature p{
+  margin:0;
+  color:#0c1322;
+  font-size:15px;
+}
+.feature ul{
+  margin:6px 0 0 22px; padding:0; color:#0c1322;
+}
+.feature li{ margin:4px 0 }
+.note{ margin-top:10px; font-size:13px; color:var(--muted); }
+
 </style>
 </head>
 <body>
 
-<!-- Cover -->
 <header class="wrap center hero">
   <img class="logo" src="https://provenia.de/wp-content/uploads/2024/10/provenia-logo.png" alt="Provenia Lösungen Logo">
   <img class="banner" src="https://media.licdn.com/dms/image/v2/D4E16AQGMfCKtx2nIdg/profile-displaybackgroundimage-shrink_350_1400/B4EZgdV4yRHoAY-/0/1752838935068?e=1759968000&v=beta&t=AIU6kF8QPdn5VyaoUmB7I0nBHp5sK8WDox1ABa08ES8" alt="Provenia Banner">
   <h1 class="h1">Lohnt sich eine GmbH für Janek Holthuis mit einem Gewinn von 140.000 Euro pro Jahr?</h1>
-  <p class="person"><strong>Ansprechpartner:</strong> Lukas Janik – Provenia Lösungen</p>
 </header>
 
 <main class="wrap">
-  <div class="divider"></div>
-
-  <!-- Ergebnis -->
-  <section class="card">
-    <h2>Ergebnis</h2>
-    <p><strong>Grund-Ergebnis:</strong> Mit der GmbH hast du ein <strong>Plus</strong> an Liquidität von <strong>16.800 €</strong>.</p>
-    <p>Außerdem: Vorteile wie <strong>Haftungsbeschränkung</strong>, bessere <strong>Finanzierbarkeit</strong> und professionellere <strong>Außenwirkung</strong>.</p>
+  <section id="ergebnis" class="card">
+    <div class="section-head">
+      <h2>Ergebnis</h2>
+      <span class="badge ok">GmbH macht Sinn</span>
+    </div>
+    <p><strong>Liquiditätswirkung:</strong> <strong>+16.800&nbsp;€</strong> gegenüber dem Einzelunternehmen.</p>
+    <p>Zusätzlich profitierst du von <strong>Haftungsbeschränkung</strong>, besserer <strong>Finanzierbarkeit</strong> und professionellerer <strong>Außenwirkung</strong>.</p>
     <p class="muted">Disclaimer: Für exakte Ergebnisse bedarf es einer individuellen Beratung. Keine Steuerberatung und keine Gewähr auf Ergebnis.</p>
   </section>
-
-  <!-- Zahlenauswertung -->
+  <br>
+    <h2>Liquiditätsvergleich Einzelunternehmen vs. GmbH</h2>
   <section class="grid cols-2" style="margin-top:18px">
-    <!-- Links: Einzelunternehmen -->
+
     <div class="card">
-      <h2>Zahlenauswertung – Einzelunternehmen</h2>
+      <h2>Einzelunternehmen</h2>
       <table>
         <thead><tr><th>Abgaben</th><th class="num">Betrag</th></tr></thead>
         <tbody>
           <tr><td>ESt.</td><td class="num">40.000 €</td></tr>
           <tr><td>GewSt.</td><td class="num">0 €</td></tr>
           <tr><td>Soli</td><td class="num">2.200 €</td></tr>
-          <tr><td>Kirchensteuer</td><td class="num">3.600 €</td></tr><!-- bei 0 € einfach Zeile entfernen -->
+          <tr><td>Kirchensteuer</td><td class="num">3.600 €</td></tr>
           <tr><td>Krankenkasse</td><td class="num">8.400 €</td></tr>
           <tr><td><strong>Gesamtabgaben</strong></td><td class="num"><strong>54.200 €</strong></td></tr>
         </tbody>
       </table>
-
       <table style="margin-top:10px">
         <tbody>
           <tr><td><strong>Privater Gewinn nach Abgaben</strong></td><td class="num"><strong>85.800 €</strong></td></tr>
           <tr><td><strong>Liquidität gesamt</strong></td><td class="num"><strong>85.800 €</strong></td></tr>
         </tbody>
       </table>
-
-      <!-- Donut Einzel -->
       <div class="donut" style="margin-top:12px">
         <svg width="220" height="220" viewBox="0 0 200 200" role="img" aria-label="Einzelunternehmen – Anteil Abgaben">
-          <defs><style>.ring{{fill:none;stroke-width:26;transform:rotate(-90deg);transform-origin:50% 50%;}}</style></defs>
+          <defs><style>.ring{fill:none;stroke-width:26;transform:rotate(-90deg);transform-origin:50% 50%;}</style></defs>
           <circle cx="100" cy="100" r="70" stroke="#E6E8EE" fill="none" stroke-width="26"></circle>
-          <!-- Werte: 40k / 54.2k = 73.8%, 0%, 2.2k=4.1%, 3.6k=6.6%, 8.4k=15.5% -->
           <circle class="ring" cx="100" cy="100" r="70" pathLength="100" stroke="#212C41" stroke-dasharray="73.80 26.20" stroke-dashoffset="0"></circle>
           <circle class="ring" cx="100" cy="100" r="70" pathLength="100" stroke="#65708A" stroke-dasharray="0.00 100.00" stroke-dashoffset="-73.80"></circle>
           <circle class="ring" cx="100" cy="100" r="70" pathLength="100" stroke="#B3B9C7" stroke-dasharray="4.06 95.94" stroke-dashoffset="-73.80"></circle>
@@ -133,9 +186,8 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
       </div>
     </div>
 
-    <!-- Rechts: GmbH -->
     <div class="card">
-      <h2>Zahlenauswertung – GmbH</h2>
+      <h2>GmbH</h2>
       <table>
         <thead><tr><th>Abgaben</th><th class="num">Betrag</th></tr></thead>
         <tbody>
@@ -146,7 +198,6 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
           <tr><td><strong>Gesamtabgaben</strong></td><td class="num"><strong>63.000 €</strong></td></tr>
         </tbody>
       </table>
-
       <table style="margin-top:10px">
         <tbody>
           <tr><td><strong>Unternehmensgewinn nach Abgaben</strong></td><td class="num"><strong>77.000 €</strong></td></tr>
@@ -154,13 +205,10 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
           <tr><td><strong>Liquidität gesamt</strong></td><td class="num"><strong>102.800 €</strong></td></tr>
         </tbody>
       </table>
-
-      <!-- Donut GmbH -->
       <div class="donut" style="margin-top:12px">
         <svg width="220" height="220" viewBox="0 0 200 200" role="img" aria-label="GmbH – Anteil Abgaben">
           <defs><style>.ring{fill:none;stroke-width:26;transform:rotate(-90deg);transform-origin:50% 50%;}</style></defs>
           <circle cx="100" cy="100" r="70" stroke="#E6E8EE" fill="none" stroke-width="26"></circle>
-          <!-- 8,010 / 63,000 = 12.7%; 18,000 = 28.6%; 990 = 1.6%; 36,000 = 57.1% -->
           <circle class="ring" cx="100" cy="100" r="70" pathLength="100" stroke="#212C41" stroke-dasharray="12.71 87.29" stroke-dashoffset="0"></circle>
           <circle class="ring" cx="100" cy="100" r="70" pathLength="100" stroke="#65708A" stroke-dasharray="28.57 71.43" stroke-dashoffset="-12.71"></circle>
           <circle class="ring" cx="100" cy="100" r="70" pathLength="100" stroke="#B3B9C7" stroke-dasharray="1.57 98.43" stroke-dashoffset="-41.28"></circle>
@@ -175,43 +223,89 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
       </div>
     </div>
   </section>
-
-  <!-- Vorteile -->
+  
   <section class="card" style="margin-top:18px">
-    <h2>Vorteile einer GmbH</h2>
-    <ul>
-      <li><strong>Haftung &amp; Sicherheit</strong></li>
-      <li><strong>Bessere Finanzierbarkeit</strong></li>
-      <li><strong>Steuervorteil</strong></li>
-      <li><strong>Außenwirkung</strong></li>
-    </ul>
+    <div class="case-cta">
+      <img src="https://media.licdn.com/dms/image/v2/D4E03AQEqoiXxmD9YBA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721725188972?e=1760572800&v=beta&t=4I3aT5HxFK5OawdF-fuY1jK2WEe6i1d9w77LD_HMA9U" alt="Lukas Janik">
+      <div>
+        <h2 style="margin:0 0 8px">Nächster Schritt</h2>
+        <p style="margin:0 0 10px">Jetzt unverbindlichen Termin mit <strong>Lukas Janik</strong> buchen. Erfahre alle Vorteile anhand deiner Zahlen – mit der Expertise aus über <strong>150 GmbH-Gründungen</strong>.</p>
+        <a class="cta" href="https://provenia.de/kontakt" target="_blank" rel="noopener">Jetzt Termin sichern</a>
+      </div>
+    </div>
   </section>
+<section class="card" id="vorteile" style="margin-top:18px">
+  <h2>Vorteile einer GmbH</h2>
 
-  <!-- Fallstudie -->
+  <div class="feature-grid">
+    <div class="feature">
+      <h3 class="title"><span class="icon">🛡️</span>Haftung & Sicherheit</h3>
+      <p>Klare Trennung von Privat- und Unternehmensvermögen. Persönliche Risiken werden reduziert, sofern keine
+         Durchgriffstatbestände vorliegen.</p>
+    </div>
+
+    <div class="feature">
+      <h3 class="title"><span class="icon">💶</span>Planbare Steuerlast (≈ 30 % effektiv)</h3>
+      <p>Körperschaftsteuer, Solidaritätszuschlag und Gewerbesteuer ergeben eine vergleichsweise stabile Gesamtbelastung.
+         Hebesatz der Kommune kann variieren.</p>
+    </div>
+
+    <div class="feature">
+      <h3 class="title"><span class="icon">🏦</span>Bessere Finanzierbarkeit</h3>
+      <p>Professionellere Außenwirkung bei Banken & Investoren. Strukturiertes Reporting und klare Eigentümerstruktur
+         erleichtern Kredit- und Förderprozesse.</p>
+    </div>
+
+    <div class="feature">
+      <h3 class="title"><span class="icon">👔</span>Gehalts- & Benefit-Optimierung</h3>
+      <p>Mehr Gestaltungsspielraum als Geschäftsführer*in: z. B. Firmenwagen, Internetpauschale, betriebliche Altersvorsorge,
+         Reisekosten, Sachbezüge u. a.</p>
+    </div>
+
+    <div class="feature">
+      <h3 class="title"><span class="icon">📈</span>Holding-Option & Ausschüttungen</h3>
+      <p>Strukturvorteile für Vermögensaufbau und Re-Investitionen; Ausschüttungen/Verkäufe können in Holding-Modellen
+         begünstigt sein (regelabhängig).</p>
+    </div>
+
+    <div class="feature">
+      <h3 class="title"><span class="icon">🤝</span>Außenwirkung & Deals</h3>
+      <p>Höhere Professionalität in Verhandlungen mit Partnern und Unternehmenskunden, oft Voraussetzung für größere Rahmenverträge.</p>
+    </div>
+  </div>
+
+  <p class="note">Hinweis: Vorteile sind abhängig von individueller Situation (Hebesatz, Branchenbesonderheiten,
+     Gesellschafter-/GF-Setup, Vergütung). Keine Steuerberatung.</p>
+</section>
+
+
   <section class="card case" style="margin-top:18px">
-    <img src="https://provenia.de/wp-content/uploads/2025/01/Jakob-Wiemer.png" alt="Jakob Wiemer – Fallstudie" loading="lazy" width="360" height="360">
-    <div>
+    <div class="case-media">
+      <img src="https://provenia.de/wp-content/uploads/2025/01/Jakob-Wiemer.png" alt="Jakob Wiemer – Fallstudie" loading="lazy" width="360" height="360">
+      <p class="attribution">Jakob Wiemer, Double Play GmbH</p>
+    </div>
+    <div class="case-body">
       <h2>Fallstudie: Jakob Wiemer</h2>
       <blockquote>
-        Die Gründung einer GmbH ist nicht nur extrem zeitaufwändig, sondern auch komplexer, als ich anfänglich dachte. Es gibt 1000 Dinge zu beachten und die Gefahr ist groß, dass man sich im Gründungs-Jungel verliert – gerade für jemanden wie mich, der sich 0,0 damit auskennt.<br><br>
-        Um möglichst wenig Zeit und Nerven zu verlieren und mit den perfekten Rahmenbedingungen zu starten, habe ich das Team der Provenia für die Gründung meiner GmbH (+ Holding) beauftragt. Ich wurde top beraten – keine Frage wurde offen gelassen. Am besten ist allerdings die maximale Zeitersparnis. Der Aufwand auf meiner Seite lag bei unter 10h.<br><br>
-        Wer kein Bock darauf hat sich durch die deutsche Bürokratie zu schlagen und das perfekte Fundament für sein Unternehmen möchte, der ist bei der Provenia extrem gut aufgehoben!
-        <footer>— Jakob Wiemer, Double Play GmbH</footer>
+        Die Gründung einer GmbH ist nicht nur extrem zeitaufwändig, sondern auch komplexer, als ich anfänglich dachte.
+        Es gibt 1000 Dinge zu beachten und die Gefahr ist groß, dass man sich im Gründungs-Jungel verliert – gerade für
+        jemanden wie mich, der sich 0,0 damit auskennt.<br><br>
+        Um möglichst wenig Zeit und Nerven zu verlieren und mit den perfekten Rahmenbedingungen zu starten, habe ich das
+        Team der Provenia für die Gründung meiner GmbH (+ Holding) beauftragt. Ich wurde top beraten – keine Frage wurde
+        offen gelassen. Am besten ist allerdings die maximale Zeitersparnis. Der Aufwand auf meiner Seite lag bei unter 10h.<br><br>
+        Wer kein Bock darauf hat sich durch die deutsche Bürokratie zu schlagen und das perfekte Fundament für sein
+        Unternehmen möchte, der ist bei der Provenia extrem gut aufgehoben!
       </blockquote>
     </div>
   </section>
 
-  <!-- CTA mit Bild -->
+  
   <section class="card" style="margin-top:18px">
     <div class="case-cta">
-      <!-- Ersetze das Bild durch ein Portrait von Lukas -->
-      <img src="https://media.licdn.com/dms/image/v2/D4E03AQEqoiXxmD9YBA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721725188972?e=1760572800&v=beta&t=4I3aT5HxFK5OawdF-fuY1jK2WEe6i1d9w77LD_HMA9U" alt="Lukas Janik (Beispielbild)">
+      <img src="https://media.licdn.com/dms/image/v2/D4E03AQEqoiXxmD9YBA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721725188972?e=1760572800&v=beta&t=4I3aT5HxFK5OawdF-fuY1jK2WEe6i1d9w77LD_HMA9U" alt="Lukas Janik">
       <div>
         <h2 style="margin:0 0 8px">Nächster Schritt</h2>
-        <p style="margin:0 0 10px">
-          Jetzt unverbindlichen Termin mit <strong>Lukas Janik</strong> buchen. Erfahre alle Vorteile anhand deiner Zahlen –
-          mit der Expertise aus über <strong>150 GmbH-Gründungen</strong>.
-        </p>
+        <p style="margin:0 0 10px">Jetzt unverbindlichen Termin mit <strong>Lukas Janik</strong> buchen. Erfahre alle Vorteile anhand deiner Zahlen – mit der Expertise aus über <strong>150 GmbH-Gründungen</strong>.</p>
         <a class="cta" href="https://provenia.de/kontakt" target="_blank" rel="noopener">Jetzt Termin sichern</a>
       </div>
     </div>
